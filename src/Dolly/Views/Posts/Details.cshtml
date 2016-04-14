@@ -1,0 +1,24 @@
+﻿@model Dolly.ViewModels.PostViewModel
+
+<h1>@Model.Post.Title</h1>
+<a asp-controller="Posts" asp-action="Edit" asp-route-id="@Model.Post.PostId">Edit</a>
+<i>Created @Model.Post.CretedAt</i>
+<p>@Model.Post.Body</p>
+
+<div class="comments">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="comments--form">
+            <form asp-controller="Posts" asp-action="Comments" asp-route-id="@Model.Post.PostId" method="POST">
+                @{ await Html.RenderPartialAsync("_CommentForm", new Comment {ObjectId = Model.Post.PostId}); }
+                <input type="submit" value="Send"/>
+            </form>
+        </div>
+    }
+    <div class="comments--list">
+        @foreach (var comment in Model.Comments)
+        {
+            await Html.RenderPartialAsync("_Comment", comment);
+        }
+    </div>
+</div>

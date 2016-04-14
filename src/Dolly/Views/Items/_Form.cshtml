@@ -1,0 +1,35 @@
+﻿@model Item
+
+<div class="col-sm-12 col-md-8 col-offset-md-2 col-lg-6 col-offset-lg-3">
+    <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
+    <div class="col-md-4">
+        <label asp-for="Name">Наименование</label>
+    </div>
+    <div class="col-md-8">
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger" />
+    </div>
+    <div class="col-md-4">
+        <label asp-for="CategoryId">Категория</label>
+    </div>
+    <div class="col-md-8">
+        <select asp-for="CategoryId" asp-items="ViewBag.Categories">
+            <option selected="selected">Выберите категорию</option>
+        </select>
+        <span asp-validation-for="CategoryId" class="text-danger" />
+    </div>
+    <div class="col-md-4">
+        <label asp-for="Description">Описание</label>
+    </div>
+    <div class="col-md-8">
+        <textarea asp-for="Description"></textarea>
+        <span asp-validation-for="Description" class="text-danger" />
+    </div>
+    <div class="col-md-4">
+        <label asp-for="Price">Цена</label>
+    </div>
+    <div class="col-md-8">
+        <input asp-for="Price" />
+        <span asp-validation-for="Price" class="text-danger" />
+    </div>
+</div>

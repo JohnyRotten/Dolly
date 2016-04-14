@@ -1,0 +1,29 @@
+﻿@using Dolly.Services
+@inject ICartProvider Provider
+@{
+    var cart = Provider.Cart;
+}
+<header class="app--header">
+    <div class="container">
+        <div class="app--header--logo">
+            <a href="/">Dolly</a>
+        </div>
+        <nav class="app--header--nav">
+            <!--<a asp-controller="Items" asp-action="Index">Товары</a>
+            <a asp-controller="Posts" asp-action="Index">Статьи</a>
+            <a asp-controller="Categories" asp-action="Index">Категории</a>-->
+            <a asp-controller="Home" asp-action="Contact">Контакты</a>
+            <a asp-controller="Home" asp-action="About">О нас</a>
+        </nav>
+        <div class="app--header--login right-align">
+            @if (cart.Items.Count > 0)
+            {
+                <a asp-controller="Cart" asp-action="Index">
+                    <i class="fa fa-shopping-cart"></i>
+                    Корзина (@cart.Price <i class="fa fa-rub"></i>)
+                </a>
+            }
+            @{ await Html.RenderPartialAsync("_LoginPartial");}
+        </div>
+    </div>
+</header>

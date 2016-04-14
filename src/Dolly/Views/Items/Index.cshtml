@@ -1,0 +1,22 @@
+﻿@using System.Security.Claims
+@model IEnumerable<Dolly.Models.Item>
+
+@{
+    ViewData["Title"] = "Товары";
+}
+
+<div class="page-header">
+    <h2 class="inline-header">Товары</h2>
+
+    @if (User.IsSignedIn())
+    {
+        <div class="right-align">
+            <a class="btn btn-primary" asp-action="Create">Добавить</a>
+        </div>
+    }
+</div>
+
+@foreach (var item in Model)
+{
+    await Html.RenderPartialAsync("_Item", item);
+}

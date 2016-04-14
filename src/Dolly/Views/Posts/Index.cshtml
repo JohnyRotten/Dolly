@@ -1,0 +1,17 @@
+﻿@using System.Security.Claims
+@model IEnumerable<Post>
+
+<div class="page-header">
+    <h4 class="inline-header">Статьи</h4>
+    @if (User.IsSignedIn())
+    {
+        <div class="right-align">
+            <a asp-action="New" class="btn">Создать</a>
+        </div>
+    }
+</div>
+
+@foreach (var post in Model)
+{
+    await Html.RenderPartialAsync("_Post", post);
+}

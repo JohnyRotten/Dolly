@@ -1,0 +1,6 @@
+﻿@model Post
+
+<form asp-controller="Posts" asp-action="New" method="POST">
+    @{ await Html.RenderPartialAsync("_Form", Model);}
+    <input type="submit" value="Create" />
+</form>

@@ -1,0 +1,9 @@
+﻿@model Post
+
+<div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
+<label asp-for="Title">Title</label>
+<input asp-for="Title"/>
+<span asp-validation-for="Title" class="text-danger"></span>
+<label asp-for="Body">Content</label>
+<textarea asp-for="Body"></textarea>
+<span asp-validation-for="Body" class="text-danger"></span>

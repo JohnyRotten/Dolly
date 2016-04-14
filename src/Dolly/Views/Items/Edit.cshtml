@@ -1,0 +1,42 @@
+﻿@model Dolly.Models.Item
+
+@{
+    ViewData["Title"] = "Редактирование";
+}
+
+<div class="page-header">
+    <h2 class="inline-header">Редактирование</h2>
+    <div class="right-align">
+        <a class="btn" asp-action="Details" asp-route-id="@Model.ItemId">К товару</a>
+        <a class="btn" asp-action="Index">К списку</a>
+    </div>
+</div>
+
+<form class="form" asp-action="Edit" asp-route-id="@Model.ItemId">
+    <input type="hidden" asp-for="ItemId"/>
+    @{ await Html.RenderPartialAsync("_Form", Model);}
+    <div class="col-offset-md-2 col-offset-lg-3 col-md-8 col-lg-6">
+        <div class="col-offset-md-4">
+            <input type="submit" class="btn" value="Сохранить" />
+        </div>
+    </div>
+</form>
+<div class="col-md-8 col-offset-md-2 col-lg-6 col-offset-lg-6">
+    <h4>Фотографии</h4>
+    @foreach (var photo in @Model.Photos)
+    {
+        await Html.RenderPartialAsync("_Photo", photo);
+    }
+</div>
+<form class="form col-md-8 col-offset-md-2 col-lg-6 col-offset-lg-6" method="post" asp-action="Upload" asp-route-id="@Model.ItemId" enctype="multipart/form-data">
+    <h4>Добавить фотографии</h4>
+    <input type="file" name="files" multiple/>
+    <input type="hidden" name="id" value="@Model.ItemId"/>
+    <input type="submit" class="btn" value="Загрузить"/>
+</form>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

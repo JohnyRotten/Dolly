@@ -1,0 +1,36 @@
+﻿@model Cart
+
+@{
+    ViewData["Title"] = "Корзина";
+}
+
+<div class="page-header">
+    <h2 class="inline-header">@ViewData["Title"]</h2>
+</div>
+
+<div class="col-md-8 col-offset-md-2 col-lg-6 col-offset-lg-3">
+    <table class="table">
+        <thead>
+        <tr>
+            <td>Наименование</td>
+            <td>Цена</td>
+            <td>Действия</td>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var item in Model.Items)
+        {
+            <tr>
+                <td><a asp-controller="Items" asp-action="Details" asp-route-id="@item.ItemId">@item.Name</a></td>
+                <td>@item.Price</td>
+                <td>
+                    @{ await Html.RenderPartialAsync("_CartButton", item); }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    <p class="right-align"><b>Итого: </b>@Model.Price</p>
+    <div class="clearfix"></div>
+    <a asp-controller="Orders" asp-action="Create" class="btn">Заказать</a>
+</div>

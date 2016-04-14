@@ -1,0 +1,29 @@
+﻿@using Dolly.Helpers
+@model System.Collections.Generic.IEnumerable<Order>
+@{
+    ViewData["Title"] = "Заказы";
+}
+
+<div class="page-header">
+    <h2 class="inline-header">@ViewData["Title"]</h2>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>Дата заказа</td>
+            <td>Статус</td>
+            <td>Дата изменения статуса</td>
+            <td>Стоимость</td>
+        </tr>
+    </thead>
+    @foreach (var order in Model)
+    {
+        <tr>
+            <td>@order.CreatedAt</td>
+            <td>@order.Status.GetDisplayName()</td>
+            <td>@order.StatusChanged</td>
+            <td>@order.Price</td>
+        </tr>
+    }
+</table>

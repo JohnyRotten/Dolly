@@ -1,0 +1,6 @@
+﻿@model Comment
+
+<input type="hidden" asp-for="ObjectId" />
+<div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
+<textarea asp-for="Content" placeholder="Введите Ваш комментарий"></textarea>
+<span asp-validation-for="Content" class="text-danger"></span>

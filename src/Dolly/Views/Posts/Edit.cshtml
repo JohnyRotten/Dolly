@@ -1,0 +1,9 @@
+﻿@model Post
+<h1>Edit</h1>
+<form asp-controller="Posts" asp-action="Edit" asp-route-id="@Model.PostId">
+    @{ await Html.RenderPartialAsync("_Form", Model);}
+    <input type="submit" value="Save"/>
+</form>
+<form asp-controller="Posts" asp-action="Delete" asp-route-id="@Model.PostId" method="POST">
+    <input type="submit" value="Delete" />
+</form>

@@ -1,0 +1,8 @@
+﻿@model Photo
+
+<div class="photo col-md-4 col-lg-3">
+    <img photo="@Model.PhotoId" alt="Fail"/>
+    <form method="POST" asp-controller="Photos" asp-action="Delete" asp-route-id="@Model.PhotoId">
+        <input type="submit" value="&times;" />
+    </form>
+</div>

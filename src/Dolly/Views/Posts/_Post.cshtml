@@ -1,0 +1,5 @@
+﻿@model Post
+
+<h2>@Model.Title</h2>
+<i>@Model.CretedAt</i>
+<a asp-controller="Posts" asp-action="Details" asp-route-id="@Model.PostId">see more...</a>

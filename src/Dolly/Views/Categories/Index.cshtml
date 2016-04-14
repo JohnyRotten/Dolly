@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Dolly.Models.Category>
+
+@{
+    ViewData["Title"] = "Категории";
+}
+
+<div class="page-header">
+    <h2 class="inline-header">Категории</h2>
+    <div class="right-align">
+        <a class="btn" asp-action="Create">Добавить</a>
+    </div>
+</div>
+    
+@foreach (var item in Model) {
+    <div class="col-md-8 col-offset-md-2">
+        <div class="category">
+            <div class="col-sm-6">@item.Title</div>
+            <div class="col-sm-6">
+                <a class="btn" asp-action="Edit" asp-route-id="@item.CategoryId">Редактировать</a>
+                <a class="btn" asp-action="Delete" asp-route-id="@item.CategoryId">Удалить</a>
+            </div>
+        </div>
+    </div>
+}

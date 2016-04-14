@@ -1,0 +1,56 @@
+﻿@using Dolly.Services
+@model Dolly.ViewModels.ItemViewModel
+
+@{
+    ViewData["Title"] = Model.Item.Name;
+}
+
+<div class="page-header">
+    <h2 class="inline-header">@Model.Item.Name</h2>
+    <div class="right-align">
+        <a class="btn" asp-action="Edit" asp-route-id="@Model.Item.ItemId">Редактировать</a>
+        <a class="btn" asp-action="Index">Назад</a>
+    </div>
+</div>
+
+<div class="item--photos col-md-5 col-lg-4">
+    <div class="col-sm-12">
+        @foreach (var photo in Model.Item.Photos)
+        {
+            <div class="col-md-4">
+                <img photo="@photo.PhotoId" alt="Fail" />
+            </div>
+        }
+    </div>
+</div>
+
+<div class="col-md-7 col-lg-8">
+    @{ await Html.RenderPartialAsync("_CartButton", Model.Item); }
+    <p>
+        <b>Цена: </b><i>@Model.Item.Price</i>
+    </p>
+    <p><b>Описание: </b>@Model.Item.Description</p>
+</div>
+
+<div class="clearfix"></div>
+
+<div class="comments col-sm-12">
+    <div class="page-header">
+        <h4>Комментарии</h4>
+    </div>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="comments--form form">
+            <form asp-controller="Items" asp-action="Comments" asp-route-id="@Model.Item.ItemId" method="POST">
+                @{ await Html.RenderPartialAsync("_CommentForm", new Comment {ObjectId = Model.Item.ItemId}); }
+                <input class="btn" type="submit" value="Отправить"/>
+            </form>
+        </div>
+    }
+    <div class="comments--list">
+        @foreach (var comment in Model.Comments)
+        {
+            await Html.RenderPartialAsync("_Comment", comment);
+        }
+    </div>
+</div>

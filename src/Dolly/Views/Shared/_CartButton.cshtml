@@ -1,0 +1,33 @@
+﻿@model Item
+@using System.Threading.Tasks
+@using Dolly.Services
+@inject ICartProvider Provider
+
+@if (Provider.Cart.Items.Contains(Model))
+{
+    <form class="inline-form"
+          asp-controller="Cart"
+          asp-action="Remove" 
+          asp-route-returnuri="@ViewData["ReturnUri"]"
+          method="POST" 
+          asp-route-id="@Model.ItemId">
+        <button type="submit" class="btn">
+            <i class="fa fa-times"></i>
+            Удалить из корзины
+        </button>
+    </form>
+}
+else
+{
+    <form class="inline-form"
+          asp-controller="Cart"
+          asp-action="Add"
+          asp-route-returnuri="@ViewData["ReturnUri"]"
+          method="POST" 
+          asp-route-id="@Model.ItemId">
+    <button type="submit" class="btn">
+        <i class="fa fa-cart-plus"></i>
+        Добавить в корзину
+    </button>
+    </form>
+}

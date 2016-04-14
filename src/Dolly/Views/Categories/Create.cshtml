@@ -1,0 +1,25 @@
+﻿@model Category
+
+@{
+    ViewData["Title"] = "Новая категория";
+}
+
+<div class="page-header">
+    <h2 class="inline-header">Редактирование</h2>
+    <div class="right-align">
+        <a asp-action="Index" class="btn">Назад</a>
+    </div>
+</div>
+
+<form asp-action="Create" class="form col-md-8 col-lg-6 col-offset-md-2 col-offset-lg-3">
+    @{ await Html.RenderPartialAsync("_Form", Model);}
+    <div class="col-offset-md-4 col-offset-lg-3">
+        <input type="submit" value="Добавить" class="btn btn-default" />
+    </div>
+</form>
+
+@section Scripts {
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

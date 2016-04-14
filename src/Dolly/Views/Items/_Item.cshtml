@@ -1,0 +1,17 @@
+﻿@model Item
+
+<div class="col-md-4 col-lg-3">
+    <div class="item">
+        <cache vary-by="@Model.ItemId" expires-after="@TimeSpan.FromMinutes(10)">
+            <img photo="@Model.FirstPhotoId" alt="Fail" class="item--image" async/>
+        </cache>
+        <div class="item--info">
+            <h4>
+                <a asp-action="Details" asp-route-id="@Model.ItemId">
+                    @Model.Name
+                </a>
+            </h4>
+            <b>@Model.Price</b>
+        </div>
+    </div>
+</div>

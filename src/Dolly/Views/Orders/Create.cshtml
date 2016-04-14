@@ -1,0 +1,86 @@
+﻿@model Order
+
+@{
+    ViewData["Title"] = "Создание заказа";
+}
+
+<div class="page-header">
+    <h2 class="inline-header">@ViewData["Title"]</h2>
+    <div class="right-align">
+
+    </div>
+</div>
+
+<form class="form col-md-8 col-offset-md-2 col-lg-6 col-offset-lg-3"
+      asp-controller="Orders"
+      asp-action="Confirm">
+    <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
+    <h3>Личные данные</h3>
+    <div class="col-md-4">
+        <label asp-for="FirstName">Имя</label>
+    </div>
+    <div class="col-md-8">
+        <input asp-for="FirstName" />
+        <span asp-validation-for="FirstName" class="text-danger" />
+    </div>
+    <div class="col-md-4">
+        <label asp-for="Patronymic">Отчество</label>
+    </div>
+    <div class="col-md-8">
+        <input asp-for="Patronymic" />
+        <span asp-validation-for="Patronymic" class="text-danger" />
+    </div>
+    <div class="col-md-4">
+        <label asp-for="LastName">Фамилия</label>
+    </div>
+    <div class="col-md-8">
+        <input asp-for="LastName" />
+        <span asp-validation-for="LastName" class="text-danger" />
+    </div>
+    <div class="col-md-4">
+        <label asp-for="Phone">Телефон</label>
+    </div>
+    <div class="col-md-8">
+        <input asp-for="Phone" />
+        <span asp-validation-for="Phone" class="text-danger" />
+    </div>
+    <div class="col-md-4">
+        <label asp-for="Address">Адрес</label>
+    </div>
+    <div class="col-md-8">
+        <input asp-for="Address"/>
+        <span asp-validation-for="Address" class="text-danger" />
+    </div>
+    <h3>Товары</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>Наименование</td>
+            <td>Количество</td>
+            <td>Действия</td>
+        </tr>
+        </thead>
+        @for (var i = 0; i < Model.OrderItems.Count; i++)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Items"
+                       asp-action="Details"
+                       asp-route-id="@Model.OrderItems[i].Item.ItemId">
+                        @Model.OrderItems[i].Item.Name
+                    </a>
+                    <input type="hidden" 
+                           name="OrderItems[@i].ItemId"
+                           value="@Model.OrderItems[i].Item.ItemId"/>
+                </td>
+                <td>
+                    <input type="number" asp-for="@Model.OrderItems[i].Count" />
+                </td>
+                <td></td>
+            </tr>
+        }
+    </table>
+    <div class="col-md-8 col-offset-md-4">
+        <input type="submit" value="Подтвердить" class="btn" />
+    </div>
+</form>
